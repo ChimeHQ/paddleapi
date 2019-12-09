@@ -1,3 +1,5 @@
+[![Github CI](https://github.com/ChimeHQ/paddleapi/workflows/CI/badge.svg)](https://github.com/ChimeHQ/paddleapi/actions)
+
 # paddleapi
 
 Package paddleapi aims to provide a Go implementation of the [Paddle](https://paddle.com) API and Webhooks.
