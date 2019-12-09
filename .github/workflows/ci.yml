@@ -9,9 +9,16 @@ on:
       - '**'
 
 jobs:
-  test:
+  test-mac:
     name: Test
-    runs-on: [macOS-latest, ubuntu-latest]
+    runs-on: macOS-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: go test
+        run: go test -v .
+  test-linux:
+    name: Test
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
       - name: go test
