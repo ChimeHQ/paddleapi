@@ -11,6 +11,7 @@ import (
 	"fmt"
 	"net/http"
 	"strconv"
+	"time"
 
 	"github.com/elliotchance/phpserialize"
 )
@@ -30,6 +31,7 @@ const (
 	FulfillmentMarketingConsentField = "marketing_consent"
 	FulfillmentNameField             = "name"
 	FulfillmentEmailField            = "email"
+	FulfillmentEventTimeField        = "event_time"
 )
 
 func NewFulfillmentRequest(req *http.Request) (*FulfillmentRequest, error) {
@@ -43,7 +45,7 @@ func NewFulfillmentRequest(req *http.Request) (*FulfillmentRequest, error) {
 	for k, v := range req.Form {
 		fReq.fields[k] = v[0]
 	}
-
+	
 	return &fReq, nil
 }
 
@@ -161,3 +163,10 @@ func (req FulfillmentRequest) Name() (string, error) {
 func (req FulfillmentRequest) Email() (string, error) {
 	return req.FieldNamed(FulfillmentEmailField), nil
 }
+
+func (req FulfillmentRequest) EventTime() (time.Time, error) {
+	value := req.FieldNamed(FulfillmentEventTimeField)
+	
+	return time.Parse("2006-01-02 15:04:05", value)
+}
+

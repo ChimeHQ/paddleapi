@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"strings"
 	"testing"
+	"time"
 )
 
 func TestNewFulfillmentRequest(t *testing.T) {
@@ -77,5 +78,10 @@ Jvdlm8I5nUhlRQTbz+S6csMCAwEAAQ==
 	
 	if n, err := fulfilmentReq.Name(); err != nil || n != "support" {
 		t.Errorf("name not correct")
-	} 
+	}
+	
+	expectedDate := time.Date(2019, 8, 30, 15, 34, 56, 0, time.UTC)
+	if et, err := fulfilmentReq.EventTime(); err != nil || et.Equal(expectedDate) == false {
+		t.Errorf("time not correct %s", err.Error())
+	}
 }
